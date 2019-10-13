@@ -1,0 +1,22 @@
+POST /login {
+    uname,pass
+}
+
+POST /register {
+    uname,pass,first name,second name
+}
+
+POST /forgotpass {
+    old pass,
+    new pass,
+}
+
+GET / {
+    home page 
+    render index.html
+}
+
+GET /electronics {
+    render frontend.
+}
+

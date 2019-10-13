@@ -32,5 +32,9 @@ module.exports.register = function (req,res){
 }
 
 module.exports.forgotpass = function (req,res){
-    
+    console.log("old pass" + user.pass)
+    if(user.uname == req.body.email) {
+        user.pass = req.body.new_password;
+    }
+    console.log("changed sucessfully"+user.pass);
 }

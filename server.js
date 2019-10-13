@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
   })
 
 //login page
-app.post('/login', (req,res) => {
+app.get('/login', (req,res) => {
     res.sendFile(__dirname+"/"+"login.html");
 
     // var email = req.body.email;
@@ -30,14 +30,19 @@ app.post('/login', (req,res) => {
 })
 
 //register page
-app.post('/register', (req,res) => {
+app.get('/register', (req,res) => {
   res.sendFile(__dirname+"/"+"register.html");
 
   //function call to insert in DB
 
 })
 
-app.post('/')
+app.get('/forgotPass',(req,res) => {
+  res.sendFile(__dirname + "/" + "forgotpass.html");
+})
 app.post('/login-auth', authenticate.login);
 app.post('/register-auth', authenticate.register);
+app.post('/forgot-auth', authenticate.forgotpass);
 
+
+app.listen(8001);

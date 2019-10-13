@@ -7,7 +7,7 @@ POST /register {
 }
 
 POST /forgotpass {
-    old pass,
+    uname ,
     new pass,
 }
 

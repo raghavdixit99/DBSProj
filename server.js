@@ -1,6 +1,7 @@
 const express = require('express');
 var bodyParser = require('body-parser')
 var authenticate = require('./authentication');
+var S3 = require('./S3_api');
 
 //sample db data for testing:
 var user = {
@@ -44,5 +45,11 @@ app.post('/login-auth', authenticate.login);
 app.post('/register-auth', authenticate.register);
 app.post('/forgot-auth', authenticate.forgotpass);
 
+(async function test(){
+  const localImage = './shoe.jpeg' ;
+  const imageRemoteName = `shoe_${new Date().getTime()}.jpeg` ;
+  var link = await S3.S3_getURL(localImage,imageRemoteName,'dbsprojimg');
+  console.log("url is " + link);
+})();
 
 app.listen(8001);

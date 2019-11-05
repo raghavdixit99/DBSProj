@@ -1,0 +1,29 @@
+{
+<<<<<<< HEAD
+   "blue.jpeg": "https://dbsprojimg.s3.ap-south-1.amazonaws.com/blue.jpeg",
+   "glassbottle.jpg": "https://dbsprojimg.s3.ap-south-1.amazonaws.com/glassbottle.jpg",
+   "glassjar.jpeg": "https://dbsprojimg.s3.ap-south-1.amazonaws.com/glassjar.jpeg",
+   "guitar.jpg": "https://dbsprojimg.s3.ap-south-1.amazonaws.com/guitar.jpg",
+   "hairoil.jpeg": "https://dbsprojimg.s3.ap-south-1.amazonaws.com/hairoil.jpeg",
+   "redpaint.jpeg": "https://dbsprojimg.s3.ap-south-1.amazonaws.com/redpaint.jpeg",
+   "sunscreen.jpeg": "https://dbsprojimg.s3.ap-south-1.amazonaws.com/sunscreen.jpeg",
+   "tagheuer.jpg": "https://dbsprojimg.s3.ap-south-1.amazonaws.com/tagheuer.jpg",
+   "typebcable.jpg": "https://dbsprojimg.s3.ap-south-1.amazonaws.com/typebcable.jpg",
+   "typeccable.jpg": "https://dbsprojimg.s3.ap-south-1.amazonaws.com/typeccable.jpg",
+   "typedadap.jpeg": "https://dbsprojimg.s3.ap-south-1.amazonaws.com/typedadap.jpeg",
+   "violin.jpeg": "https://dbsprojimg.s3.ap-south-1.amazonaws.com/violin.jpegD"
+=======
+   "blue.jpeg": "https://dbsprojimg1.s3.ap-south-1.amazonaws.com/blue.jpeg?AWSAccessKeyId=AKIAIHM5ADAY5WVKOOLQ&Expires=1572948582&Signature=psRn14GM1bvuJor470ao52vrF0k%3D",
+   "glassbottle.jpg": "https://dbsprojimg1.s3.ap-south-1.amazonaws.com/glassbottle.jpg?AWSAccessKeyId=AKIAIHM5ADAY5WVKOOLQ&Expires=1572948583&Signature=sPDs6xRNnhO1TYsalRWF5fWdL2Q%3D",
+   "glassjar.jpeg": "https://dbsprojimg1.s3.ap-south-1.amazonaws.com/glassjar.jpeg?AWSAccessKeyId=AKIAIHM5ADAY5WVKOOLQ&Expires=1572948583&Signature=YeDGwgmEdwE0lf3BPsBwZWtyMgs%3D",
+   "guitar.jpg": "https://dbsprojimg1.s3.ap-south-1.amazonaws.com/guitar.jpg?AWSAccessKeyId=AKIAIHM5ADAY5WVKOOLQ&Expires=1572948584&Signature=eenPq3M5vCu9%2FUBWrmeymRU%2BF4Y%3D",
+   "hairoil.jpeg": "https://dbsprojimg1.s3.ap-south-1.amazonaws.com/hairoil.jpeg?AWSAccessKeyId=AKIAIHM5ADAY5WVKOOLQ&Expires=1572948584&Signature=6%2BxEW5fVpFsAABXTeX9CA3qKQKk%3D",
+   "redpaint.jpeg": "https://dbsprojimg1.s3.ap-south-1.amazonaws.com/redpaint.jpeg?AWSAccessKeyId=AKIAIHM5ADAY5WVKOOLQ&Expires=1572948585&Signature=5XlGTCAuIgJpWIKRpYyKzmgTb4w%3D",
+   "sunscreen.jpeg": "https://dbsprojimg1.s3.ap-south-1.amazonaws.com/sunscreen.jpeg?AWSAccessKeyId=AKIAIHM5ADAY5WVKOOLQ&Expires=1572948585&Signature=YscPkFxRuRCUD2fdXWUs4dYBBj0%3D",
+   "tagheuer.jpg": "https://dbsprojimg1.s3.ap-south-1.amazonaws.com/tagheuer.jpg?AWSAccessKeyId=AKIAIHM5ADAY5WVKOOLQ&Expires=1572948587&Signature=769iHTb4B9AdXLOy4G420j1v41E%3D",
+   "typebcable.jpg": "https://dbsprojimg1.s3.ap-south-1.amazonaws.com/typebcable.jpg?AWSAccessKeyId=AKIAIHM5ADAY5WVKOOLQ&Expires=1572948588&Signature=nCfwvLqrpv1sOImsWqFvlLYszbc%3D",
+   "typeccable.jpg": "https://dbsprojimg1.s3.ap-south-1.amazonaws.com/typeccable.jpg?AWSAccessKeyId=AKIAIHM5ADAY5WVKOOLQ&Expires=1572948588&Signature=3sOwLLosRC1gpem%2Bfib%2FsD3G7ro%3D",
+   "typedadap.jpeg": "https://dbsprojimg1.s3.ap-south-1.amazonaws.com/typedadap.jpeg?AWSAccessKeyId=AKIAIHM5ADAY5WVKOOLQ&Expires=1572948589&Signature=VI1390ipHRnrhLtWk4EKiZbRjDY%3D",
+   "violin.jpeg": "https://dbsprojimg1.s3.ap-south-1.amazonaws.com/violin.jpeg?AWSAccessKeyId=AKIAIHM5ADAY5WVKOOLQ&Expires=1572948589&Signature=ZQi8OLleVdaYXM0GJGWP9sjhHC8%3D"
+>>>>>>> b790888780b5c4d5e61f7fada56fc86afdf33602
+}

@@ -20,3 +20,16 @@ GET /electronics {
     render frontend.
 }
 
+/fetchbycategory{
+need req.body.category    
+}
+/fetchALL {
+ need req.bosdy.value
+}
+
+/addproduct {
+    need something like :
+    <form action="/addProduct" method="post" enctype="multipart/form-data">
+  <input type="file" name="image" />
+</form>
+}

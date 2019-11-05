@@ -1,10 +1,10 @@
 var AWS = require('aws-sdk')
 const fs = require('fs')
 
-const BUCKET = 'dbsprojimg'
+const BUCKET = 'dbsprojimg1'
 //const REGION = 'Asia Pacific (Mumbai)'
-const ACCESS_KEY = 'AKIAV3RVMJER5EMUNTPW'
-const SECRET_KEY = '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'
+const ACCESS_KEY = 'AKIAIHM5ADAY5WVKOOLQ';
+const SECRET_KEY = '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';
 
 const localImage = './shoe.jpeg' ;
 const imageRemoteName = `shoe_${new Date().getTime()}.jpeg` ;
@@ -28,6 +28,7 @@ await s3.putObject({
     console.log(`done! - `, response)
      url = s3.getSignedUrl('getObject', { Bucket: BUCKET, Key: imageRemoteName })
     //console.log(  `The URL is ` + url);
+    url = url.split('?')[0];
   })
   .catch(err => {
     console.log('failed:', err);
@@ -35,3 +36,4 @@ await s3.putObject({
 
   return url;
 }
+

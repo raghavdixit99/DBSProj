@@ -77,18 +77,24 @@
     <!-- Optional JavaScript -->
 
     <script>
-
-
-
-        document.getElementById("").customSlider({
-            start: [25, 50],
-            tooltips: [true, true],
-            connect: true,
-            range: {
-            'min': 0,
-            'max': 100
+        fetch("https://localhost:8001/fetchAll", {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ 'value': "unitprice" })
+        }).then(response => {
+            if(response.status !== 200) {
+                console.log("Error: Status code: " + response.status);
+                return;
             }
-        });
+            response.json().then( data => {
+                console.log(data);
+            })
+        }).catch( err => {
+            console.log(err);
+        })
 
     </script>
 

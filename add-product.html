@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- CSS Dependencies -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/shards.min.css">
+</head>
+
+<body>
+    <div class="container-fluid" style="padding: 5em">
+        <h1 class="text-left">Add Product</h1>
+        <div class="row" style="padding: 2em">
+            <h3> Item Info</h3>
+            <div class="col-md-12" id="leftColumn">
+                <form role="form" style="padding: 2em">
+                    <div class="form-group">
+                        <label>
+                            Product Name
+                        </label>
+                        <input type="email" class="form-control" id="prodname" />
+                    </div>
+                    <div class="form-group">
+                            <label>
+                                Merchant ID
+                            </label>
+                            <input type="email" class="form-control" id="mid" />
+                        </div>
+                    <div class="form-group">
+                        <label>
+                            Discount
+                        </label>
+                        <input type="email" class="form-control" id="discount" />
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Unit Price
+                        </label>
+                        <input type="password" class="form-control" id="uprice" />
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Product Image
+                        </label>
+                        <form action="/profile" method="post" enctype="multipart/form-data">
+                            <input type="file" name="avatar" />
+                        </form>
+                    </div>
+                    <div class="form-group">
+                        <select class="custom-select form-group">
+                            <option selected>Category...</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                            <select class="custom-select form-group">
+                                <option selected>Shippment Contractor...</option>
+                                <option value="1">Option 1</option>
+                                <option value="2">Option 2</option>
+                                <option value="3">Option 3</option>
+                            </select>
+                        </div>
+                    <button type="submit" class="btn btn-primary" id="userSubmitBtn">
+                        Submit
+                    </button>
+                    <!-- Trigger -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Launch Sample Modal
+                    </button>
+                    
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                                    <div class="card" style="width: 20rem;">
+                                            <img class="card-img-top" src="https://dbsprojimg1.s3.ap-south-1.amazonaws.com/tagheuer.jpg" alt="Card image cap">
+                                            <div class="card-body">
+                                              <h4 class="card-title" id="prod-title">Sample Card Title</h4>
+                                              <p class="card-text">He seems sinking under the evidence could not only grieve and a visit. The father is to bless and placed in his length hid...</p>
+                                              <a href="#" class="btn btn-primary">Add to cart &rarr;</a>
+                                            </div>
+                                          </div>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Nope</button>
+                            <button type="button" class="btn btn-primary">Yep</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+      
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <style>
+
+    </style>
+
+    <!-- Optional JavaScript -->
+
+    <script>
+        //Confirm Password badge Logic
+
+        document.getElementById("cname").hidden = true;
+        document.getElementById("lnum").hidden = true;
+
+        document.getElementById("confirmPassword").addEventListener("change", (val) => {
+            document.getElementById("match").style.visibility = "visible";
+            if (document.getElementById("password").value === document.getElementById("confirmPassword")
+                .value) {
+                document.getElementById("match").classList.replace("badge-warning", "badge-success");
+                document.getElementById("match").innerHTML = "Passwords Match"
+            } else {
+                document.getElementById("match").classList.replace("badge-success", "badge-warning");
+                document.getElementById("match").innerHTML = "Passwords Do Not Match"
+            }
+        });
+
+        document.getElementById("btn-group").addEventListener("click", (val) => {
+            if (document.getElementById("option1").checked) {
+                document.getElementById("cname").hidden = true;
+                document.getElementById("lnum").hidden = true;
+            }
+            if (document.getElementById("option2").checked) {
+                document.getElementById("cname").hidden = false;
+                document.getElementById("lnum").hidden = false;
+            }
+        });
+    </script>
+
+    <!-- JavaScript Dependencies: jQuery, Popper.js, Bootstrap JS, Shards JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.12.min.js"></script>
+    <script src="js/shards.min.js"></script>
+</body>
+
+</html>

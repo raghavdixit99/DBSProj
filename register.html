@@ -1,13 +1,167 @@
-<html>  
-<body>  
- 
-<form action="/register-auth" method="POST">  
-First Name: <input type="text" name="first_name">  
-Last Name: <input type="text" name ="last_name" >
-Email: <input type="text" name="email">
-Paswword: <input type="password" name="password">
-   
-<input type="submit" value="Submit">  
-</form>
-</body>  
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- CSS Dependencies -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/shards.min.css">
+</head>
+
+<body>
+    <div class="container-fluid" style="padding: 5em">
+        <h1 class="text-left">Register</h1>
+        <div class="row" style="padding: 2em">
+            <h3> Personal Info</h3>
+            <div class="col-md-12" id="leftColumn">
+                <form role="form" style="padding: 2em">
+                    <div class="form-group seller">
+                        <label>
+                            First Name
+                        </label>
+                        <input type="text" class="form-control" id="fname" />
+                    </div>
+                    <div class="form-group seller">
+                        <label>
+                            Last Name
+                        </label>
+                        <input type="text" class="form-control" id="lname" />
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            userID
+                        </label>
+                        <input type="email" class="form-control" id="userID" />
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Email ID
+                        </label>
+                        <input type="email" class="form-control" id="email" />
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Password
+                        </label>
+                        <input type="password" class="form-control" id="password" />
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Confirm Password
+                        </label>
+                        <input type="password" class="form-control" id="confirmPassword" />
+                    </div>
+                    <br>
+                    <span class="badge badge-success badge-pill" style="visibility:hidden;" id="match">
+                        Passwords match</span>
+                    <div class="form-group">
+                        <label>Contact Number</label>
+                        <input type="phone" class="form-control" id="contactNumber" />
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Address Line 1
+                        </label>
+                        <input type="text" class="form-control" id="addl1" />
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Address Line 2
+                        </label>
+                        <input type="text" class="form-control" id="addl2" />
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Address Line 3
+                        </label>
+                        <input type="text" class="form-control" id="addl3" />
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Pin Code
+                        </label>
+                        <input type="text" class="form-control" id="pin" />
+                    </div>
+                    <div class="btn-group btn-group-toggle" id="btn-group" data-toggle="buttons">
+                        <label class="btn btn-primary active">
+                            <input type="radio" name="options" id="option1" autocomplete="off" checked> Buyer
+                        </label>
+                        <label class="btn btn-primary">
+                            <input type="radio" name="options" id="option2" autocomplete="off"> Seller
+                        </label>
+                    </div>
+                    <br />
+                    <div class="form-group" id="cname">
+                        <label>
+                            Company Name
+                        </label>
+                        <input type="text" class="form-control" id="cname" />
+                    </div>
+                    <div class="form-group" id="lnum">
+                        <label>
+                            Licence Number
+                        </label>
+                        <input type="text" class="form-control" id="lnum" />
+                    </div>
+                    <br/>
+                    <button type="submit" class="btn btn-primary" id="userSubmitBtn">
+                        Submit
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <style>
+
+    </style>
+
+    <!-- Optional JavaScript -->
+
+    <script>
+        //Confirm Password badge Logic
+
+        document.getElementById("cname").hidden = true;
+        document.getElementById("lnum").hidden = true;
+
+        document.getElementById("confirmPassword").addEventListener("change", (val) => {
+            document.getElementById("match").style.visibility = "visible";
+            if (document.getElementById("password").value === document.getElementById("confirmPassword")
+                .value) {
+                document.getElementById("match").classList.replace("badge-warning", "badge-success");
+                document.getElementById("match").innerHTML = "Passwords Match"
+            } else {
+                document.getElementById("match").classList.replace("badge-success", "badge-warning");
+                document.getElementById("match").innerHTML = "Passwords Do Not Match"
+            }
+        });
+
+        document.getElementById("btn-group").addEventListener("click", (val) => {
+            if(document.getElementById("option1").checked) {
+                document.getElementById("cname").hidden = true;
+                document.getElementById("lnum").hidden = true;
+            }
+            if(document.getElementById("option2").checked) {
+                document.getElementById("cname").hidden = false;
+                document.getElementById("lnum").hidden = false;
+            }
+        });
+    </script>
+
+    <!-- JavaScript Dependencies: jQuery, Popper.js, Bootstrap JS, Shards JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+    <script src="js/shards.min.js"></script>
+</body>
+
 </html>

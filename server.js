@@ -16,7 +16,8 @@ app.use(bodyParser.json());
 
 // create the homepage route at '/'
 app.get('/', (req, res) => {
-    res.sendFile(__dirname+"/"+"index.html");
+    res.sendFile(__dirname+"/testing-pages"+"/index.html");
+    
   })
 
 //login page
@@ -30,6 +31,8 @@ app.get('/login', (req,res) => {
    
 })
 
+
+
 //register page
 app.get('/register', (req,res) => {
   res.sendFile(__dirname+"/"+"register.html");
@@ -41,15 +44,16 @@ app.get('/register', (req,res) => {
 app.get('/forgotPass',(req,res) => {
   res.sendFile(__dirname + "/" + "forgotpass.html");
 })
-app.post('/login-auth', authenticate.login);
-app.post('/register-auth', authenticate.register);
+app.post('/login-auth-customer', authenticate.login);
+app.post('/login-auth-seller', authenticate.loginmerchant);
+app.post('/register-auth-customer', authenticate.register);
+app.post('/register-auth-seller'.authenticate.registerseller);
 app.post('/forgot-auth', authenticate.forgotpass);
 
-(async function test(){
-  const localImage = './shoe.jpeg' ;
-  const imageRemoteName = `shoe_${new Date().getTime()}.jpeg` ;
-  var link = await S3.S3_getURL(localImage,imageRemoteName,'dbsprojimg');
-  console.log("url is " + link);
-})();
+// (async function test(){
+//   const localImage = './shoe.jpeg' ;
+//   const imageRemoteName = `shoe_${new Date().getTime()}.jpeg` ;
+//   var link = await S3.S3_getURL(localImage,imageRemoteName,'dbsprojimg');
+// })();
 
 app.listen(8001);

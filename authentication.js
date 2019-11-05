@@ -1,25 +1,36 @@
 var express = require('express');
-var sql = require('mysql');
+var mysql = require('mysql');
 
-//sample user object:
-var user = {
-    "uname" : 'raghav99@gmail.com',
-    "pass" : 'lauda',
-    "first_name" : 'Raghav',
-    "last_name" : 'Dixit'
+var connection = mysql.createConnection({
+  host     : '35.154.87.215',
+  user     : 'monty',
+  password : 'some_pass',
+  port     : '3306',
+  database : 'DBS'
+});
+
+connection.connect(function(err) {
+  if (err) {
+    console.error('Database connection failed: ' + err.stack);
+    return;
   }
+  console.log('Connected to database.');
+});
+
 
 module.exports.login = function(req,res) {
     //connection.query function to fetch user details from db
     //error handling
-    if (req.body.email == user.uname & req.body.password == user.pass){
-        console.log("Login sucessfull");
-      }
-      else {
-        console.log("Invalid credentials");
-      }
+    console.log(req);
+    connection.query('select * from USER where userID ='+req.body.email+'and'+'password ='+req.body.password, function (err, result, fields) {
+      if(err) throw err;
+      if(result == null) console.log('unsuccessful');
+      console.log('login successful');
+      });
 }
-
+module.exports.loginmerchant = function (req,res) {
+  //fetch merchent details
+}
 module.exports.register = function (req,res){
     var user_sample = {
         "uname" : req.body.email,

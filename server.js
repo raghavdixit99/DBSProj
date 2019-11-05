@@ -3,7 +3,18 @@ var bodyParser = require('body-parser')
 var authenticate = require('./authentication');
 var S3 = require('./S3_api');
 var multer = require('multer');
-var upload = multer({ dest: __dirname + '/images' });
+//var upload = multer({ dest: __dirname + '/images' });
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, __dirname+'/images')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '.jpg') //Appending .jpg
+  }
+})
+
+var upload = multer({ storage: storage });
 //sample db data for testing:
 var user = {
   "uname" : 'raghav99@gmail.com',
@@ -53,7 +64,15 @@ app.post('/login-auth-seller', authenticate.loginmerchant);
 app.post('/register-auth-customer', authenticate.register);
 app.post('/fetchByPriceRange',authenticate.fetchByPriceRange);
 app.post('/fetchallcategories',authenticate.fetchAllCategories);
-app.post('/addProduct',upload.single('image'),authenticate.Addproduct);
+app.post('/addProduct',upload.single('image'),async function (req,res) {
+  if(req.file){
+    res.json(req.file);
+    console.log(req.file.filename);
+    link = (await S3.S3_getURL(req.file.path,req.file.originalname,'dbsprojimg1')).split("?")[0];
+    console.log(link);
+    authenticate.Addproduct(link,req.body);
+  }
+});
 //app.post('/register-auth-seller'.authenticate.register);
 app.post('/forgot-auth', authenticate.forgotpass);
 

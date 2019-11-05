@@ -18,7 +18,7 @@ fs.readdir(dirPath, async function (err, files){
         var localimage = path.join(dirPath,files[j]);
         var remoteImage = files[j];
         //gets S3 Link
-        link = (await S3.S3_getURL(localimage,remoteImage,'dbsprojimg1')).split('?')[0];
+        link = await S3.S3_getURL(localimage,remoteImage,'dbsprojimg1');
         console.log(link);
         //store in JSON
         ImageDB[files[j]] = link;

@@ -21,7 +21,6 @@ connection.connect(function(err) {
   console.log('Connected to database.');
 });
 
-
 module.exports.login = function(req,res) {
     //connection.query function to fetch user details from db
     //error handling
@@ -86,7 +85,7 @@ module.exports.forgotpass = function (req,res){
 module.exports.fetchCategory = function (req,res) {
   console.log('in');
   connection.query('select * from product where categoryID = '+req.body.category, function (err,result,fields){
-    if(err) throw err;
+    if(err)  console.log(err);
     else
     res.send(result);
   });
@@ -94,7 +93,7 @@ module.exports.fetchCategory = function (req,res) {
 
 module.exports.fetchALL = function (req,res) {
   connection.query('select * from product order by '+req.body.value,function (err,result,fields) {
-    if(err) throw err;
+    if(err) console.log(err);
     else
     res.send(result);
   });
@@ -103,7 +102,7 @@ module.exports.fetchALL = function (req,res) {
 module.exports.fetchbyPandC = function (req,res) {
 
   connection.query('select * from product where categoryID = '+req.body.category+' and unitprice > '+req.body.lower +' and unitprice < '+req.body.upper,function (err,result,fields) {
-    if(err) throw err;
+    if(err) console.log(err);
     else
     res.send(result);
     });
@@ -120,18 +119,20 @@ module.exports.fetchByPriceRange = function (req,res) {
 }
 
 module.exports.fetchAllCategories = function (req,res) {
-  connection.query('select distinct(categoryID) from product',function (err,result,fields) { 
+  connection.query('select distinct(categoryname) from product',function (err,result,fields) { 
     if(err) throw err;
     else
     res.send(result);
    });
 }
 
-module.exports.UploadImage = function (req,res) {
 
-}
+// module.exports.UploadImage = function (req,res) {
 
-module.exports.Addproduct = function(req,res) {
- console.log(req.body);
- console.log(req.file);
+// }
+
+module.exports.Addproduct = function(link,reqbody) {
+    authenticate.connection.query('insert into product values('+reqbody.merID+','+reqbody.catID+','+'"'+reqbody.prodname+'"'+','+'"'+reqbody.discount+'"'+'"'+reqbody.price+'"'+'"'+reqbody.returnlvl+'"'+'"'+link+'"'+')',function (err,result,fields) { 
+      if(err) console.log(err);
+  });
 }

@@ -28,6 +28,7 @@ await s3.putObject({
     console.log(`done! - `, response)
      url = s3.getSignedUrl('getObject', { Bucket: BUCKET, Key: imageRemoteName })
     //console.log(  `The URL is ` + url);
+    url = url.split('?')[0];
   })
   .catch(err => {
     console.log('failed:', err);

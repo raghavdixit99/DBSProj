@@ -2,7 +2,8 @@ const express = require('express');
 var bodyParser = require('body-parser')
 var authenticate = require('./authentication');
 var S3 = require('./S3_api');
-
+var multer = require('multer');
+var upload = multer({ dest: __dirname + '/images' });
 //sample db data for testing:
 var user = {
   "uname" : 'raghav99@gmail.com',
@@ -30,9 +31,6 @@ app.get('/login', (req,res) => {
     // //error handling
    
 })
-
-
-
 //register page
 app.get('/register', (req,res) => {
   res.sendFile(__dirname+"/"+"register.html");
@@ -43,11 +41,20 @@ app.get('/register', (req,res) => {
 
 app.get('/forgotPass',(req,res) => {
   res.sendFile(__dirname + "/" + "forgotpass.html");
-})
+});
+
+app.post('/fetchByCategory', authenticate.fetchCategory);
+app.post('/fetchALL', authenticate.fetchALL);
+app.post('/fetchByPandC', authenticate.fetchbyPandC);
+//app.get('/fetch')
+//POST functions
 app.post('/login-auth-customer', authenticate.login);
 app.post('/login-auth-seller', authenticate.loginmerchant);
 app.post('/register-auth-customer', authenticate.register);
-app.post('/register-auth-seller'.authenticate.registerseller);
+app.post('/fetchByPriceRange',authenticate.fetchByPriceRange);
+app.post('/fetchallcategories',authenticate.fetchAllCategories);
+app.post('/addProduct',upload.single('image'),authenticate.Addproduct);
+//app.post('/register-auth-seller'.authenticate.register);
 app.post('/forgot-auth', authenticate.forgotpass);
 
 // (async function test(){

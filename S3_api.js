@@ -3,8 +3,8 @@ const fs = require('fs')
 
 const BUCKET = 'dbsprojimg1'
 //const REGION = 'Asia Pacific (Mumbai)'
-const ACCESS_KEY = 'AKIAITMTDZN3JC54LBBQ';
-const SECRET_KEY = '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';
+const ACCESS_KEY = 'AKIAIWPZYE56GDYZPFUQ';
+const SECRET_KEY = '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';
 
 const localImage = './shoe.jpeg' ;
 const imageRemoteName = `shoe_${new Date().getTime()}.jpeg` ;

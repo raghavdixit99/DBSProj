@@ -142,14 +142,33 @@ module.exports.fetchAllCategories = function (req,res) {
     res.send(result);
    });
 }
-
-
+module.exports.getCategorybyID = function (req,res) {
+  connection.query('select categoryname from category where categoryID='+req.body.catID,function (err,result,fields) { 
+    if(err)  console.log(err);
+    else
+    res.send(result);
+   });
+}
+module.exports.getMerchantbyID = function (req,res) {
+  connection.query('select cname from merchant where merID='+'"'+req.body.merID+'"',function (err,result,fields) { 
+    if(err)  console.log(err);
+    else
+    res.send(result);
+   });
+}
+module.exports.getShipper = function (req,res) {
+  connection.query('select distinct(companyname) from shippinginfo',function (err,result,fields) { 
+    if(err)  console.log(err);
+    else
+    res.send(result);
+   });
+}
 // module.exports.UploadImage = function (req,res) {
 
 // }
 
 module.exports.Addproduct = function(link,reqbody) {
-    authenticate.connection.query('insert into product values('+reqbody.merID+','+reqbody.catID+','+'"'+reqbody.prodname+'"'+','+'"'+reqbody.discount+'"'+'"'+reqbody.price+'"'+'"'+reqbody.returnlvl+'"'+'"'+link+'"'+')',function (err,result,fields) { 
+    connection.query('insert into product values('+reqbody.prodID+','+'"'+reqbody.merID+'"'+','+reqbody.shipperID+','+reqbody.catID+','+'"'+reqbody.prodname+'"'+','+'"'+reqbody.discount+'"'+','+'"'+reqbody.price+'"'+','+reqbody.returnlvl+','+'"'+link+'"'+')',function (err,result,fields) { 
       if(err) console.log(err);
   });
 }

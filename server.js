@@ -1,5 +1,6 @@
 const express = require('express');
 var bodyParser = require('body-parser')
+var cors = require('cors')
 var authenticate = require('./authentication');
 var S3 = require('./S3_api');
 var multer = require('multer');
@@ -25,6 +26,10 @@ var user = {
 const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use(cors({
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}));
+app.options('*', cors())
 
 // create the homepage route at '/'
 app.get('/', (req, res) => {

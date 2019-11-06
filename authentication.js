@@ -25,27 +25,32 @@ module.exports.login = function(req,res) {
     //connection.query function to fetch user details from db
     //error handling
     //console.log(req);
-    connection.query('select * from USER where userID ='+req.body.email+' and '+'password ='+req.body.password, function (err, result, fields) {
+    connection.query('select * from USER where userID="'+req.body.email+'" and '+'password="'+req.body.password+'";', function (err, result, fields) {
       if(err) console.log(err);
       if(result == null) {
         console.log('unsuccessful');
         res.send("Unsuccessful");
       } else {
         console.log('login successful');
-        res.send("Successful");  
+        if (req.cookies === undefined || req.cookies.cookieName === undefined) { 
+          res.cookie('loginCookie',req.body.email, { maxAge: 900000, httpOnly: true }).sendFile(__dirname+"/"+"index.html");
+        } else {
+          console.log('cookie exists', req.cookies.loginCookie);
+          res.sendFile(__dirname+"/"+"index.html");
+        }   
       }
     });
 }
 module.exports.loginmerchant = function (req,res) {
   //fetch merchent details
-  connection.query('select * from USER where userID ='+req.body.selleremail+' and '+'password ='+req.body.sellerpassword, function (err, result, fields) {
+  connection.query('select * from USER where userID="'+req.body.selleremail+'" and '+'password="'+req.body.sellerpassword+'"', function (err, result, fields) {
     if(err) console.log(err);
       if(result == null) {
         console.log('unsuccessful');
-        res.send("Unsuccessful");
+        res.send({"status":"Unsuccessful"});
       } else {
         console.log('login successful');
-        res.send("Successful");  
+        res.sendFile(__dirname+"/"+"index.html");  
       }
     });
 }

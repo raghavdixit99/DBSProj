@@ -33,7 +33,7 @@ app.options('*', cors())
 
 // create the homepage route at '/'
 app.get('/', (req, res) => {
-    res.sendFile(__dirname+"/testing-pages"+"/index.html");
+    res.sendFile(__dirname+"/index.html");
     
   })
 

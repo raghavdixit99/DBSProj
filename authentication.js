@@ -136,7 +136,7 @@ module.exports.fetchByPriceRange = function (req,res) {
 }
 
 module.exports.fetchAllCategories = function (req,res) {
-  connection.query('select distinct(categoryname) from product',function (err,result,fields) { 
+  connection.query('select distinct(categoryname) from product natural join category',function (err,result,fields) { 
     if(err)  console.log(err);
     else
     res.send(result);

@@ -44,7 +44,7 @@
                             </div>
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" /> Remember Me
+                                    <input type="checkbox"/> Remember Me
                                 </label>
                             </div>
                             <button type="submit" class="btn btn-primary" id="userSubmitBtn">
@@ -101,6 +101,36 @@
             var expires = "expires="+ d.toUTCString();
             document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
         }
+
+        document.getElementById("userSubmitBtn").addEventListener("click", (ev) => {
+            setCookie("loginCookie",document.getElementById("exampleInputEmail1").value, 2);
+            var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "http://localhost:8001/login",
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json",
+                "User-Agent": "PostmanRuntime/7.17.1",
+                "Accept": "*/*",
+                "Cache-Control": "no-cache",
+                "Postman-Token": "340d8f9d-871e-4e19-bef5-29711805a2f5,b5cbdf53-5051-43f7-992b-0fe14096af2e",
+                "Host": "localhost:8001",
+                "Accept-Encoding": "gzip, deflate",
+                "Content-Length": "28",
+                "Connection": "keep-alive",
+                "cache-control": "no-cache"
+            },
+            "processData": false,
+            "data": `{\n    \"email\": \"${document.getElementById("exampleInputEmail1").value}\",\n    \"password\":\"${document.getElementById("exampleInputPassword1").value}\"\n}`
+            }
+
+            $.ajax(settings).done(function (response) {
+                if(response == "Success")
+                    console.log("HEYEYEYBOUBPUVIVPIDUP");
+                    setCookie("loginCookie", document.getElementById("exampleInputEmail1").value, 10);
+            });
+        })
 
     </script>
 

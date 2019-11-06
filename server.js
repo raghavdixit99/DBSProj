@@ -8,21 +8,16 @@ var multer = require('multer');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, __dirname+'/images')
+    cb(null, __dirname+'/images');
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + '.jpg') //Appending .jpg
+    cb(null, Date.now() + '.jpg'); //Appending .jpg
   }
 })
 
 var upload = multer({ storage: storage });
 //sample db data for testing:
-var user = {
-  "uname" : 'raghav99@gmail.com',
-  "pass" : 'lauda',
-  "first_name" : 'Raghav',
-  "last_name" : 'Dixit'
-}
+
 const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -69,7 +64,11 @@ app.post('/login-auth-seller', authenticate.loginmerchant);
 app.post('/register-auth-customer', authenticate.register);
 app.post('/fetchByPriceRange',authenticate.fetchByPriceRange);
 app.post('/fetchallcategories',authenticate.fetchAllCategories);
+app.post('/getMerchant',authenticate.getMerchantbyID);
+app.post('/getCategorybyId',authenticate.getCategorybyID);
+app.post('/getShipper',authenticate.getShipper)
 app.post('/addProduct',upload.single('image'),async function (req,res) {
+  console.log('in');
   if(req.file){
     res.json(req.file);
     console.log(req.file.filename);
@@ -77,6 +76,7 @@ app.post('/addProduct',upload.single('image'),async function (req,res) {
     console.log(link);
     authenticate.Addproduct(link,req.body);
   }
+  else console.log('error');
 });
 //app.post('/register-auth-seller'.authenticate.register);
 app.post('/forgot-auth', authenticate.forgotpass);
@@ -87,4 +87,4 @@ app.post('/forgot-auth', authenticate.forgotpass);
 //   var link = await S3.S3_getURL(localImage,imageRemoteName,'dbsprojimg');
 // })();
 
-app.listen(8001);
+app.listen(8002);

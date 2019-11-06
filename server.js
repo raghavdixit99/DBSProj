@@ -59,6 +59,8 @@ app.post('/fetchALL', authenticate.fetchALL);
 app.post('/fetchByPandC', authenticate.fetchbyPandC);
 //app.get('/fetch')
 //POST functions
+app.post('/addToCart',authenticate.AddtoCart);
+app.post('/Viewcart',authenticate.ViewCart);
 app.post('/login-auth-customer', authenticate.login);
 app.post('/login-auth-seller', authenticate.loginmerchant);
 app.post('/register-auth-customer', authenticate.register);

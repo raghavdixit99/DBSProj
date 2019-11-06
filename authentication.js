@@ -177,3 +177,19 @@ module.exports.Addproduct = function(link,reqbody) {
       if(err) console.log(err);
   });
 }
+
+module.exports.AddtoCart = function (req,res) {
+  connection.query('insert into cart values('+'"'+req.body.custID+'"'+','+req.body.prodID+','+req.body.prodcnt+')',function (err,result,fields) { 
+    if(err)  console.log(err);
+    else
+    res.send(result);
+   });
+}
+
+module.exports.ViewCart = function (req,res) {
+  connection.query('select * from cart',function(err,result){
+    if(err)  console.log(err);
+    else
+    res.send(result);
+  })
+}

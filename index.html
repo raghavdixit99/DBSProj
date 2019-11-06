@@ -31,27 +31,24 @@
                 <ul class="nav">
                     <li class="nav-item dropdown ml-md-auto">
                         <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink"
-                            data-toggle="dropdown">Hello!</a>
+                            data-toggle="dropdown">Hello! </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="#">View Cart</a>
                             <a class="dropdown-item" href="#">View Order History</a>
                             <a class="dropdown-item" href="#">View Profile</a>
                             <!-- TODO add views for these pages -->
-                            <!-- <div class="dropdown-divider"></div> 
-                            <a class="dropdown-item" href="/login">Login</a> -->
+                            <div class="dropdown-divider"></div> 
+                            <a class="dropdown-item" onclick="clearCookies">Logout</a>
                         </div>
                     </li>
                 </ul>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3" id="vvv">
+            <div class="col-md-3">
                 <h3>Filters</h3>
-                <select class="custom-select">
+                <select class="custom-select" id="selectorvvv" onchange="run()">
                     <option selected>Category...</option>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
                 </select>
                 <br />
                 <button id="sortbyprice" type="submit" class="btn btn-primary" id="userSubmitBtn" style="margin: 2em">
@@ -61,12 +58,6 @@
                     style="margin: 2em">
                     Sort by Discount
                 </button>
-                <!-- <div class="slidecontainer">
-                        <input type="range" min="1" max="100" value="50" id="slider1">
-                    </div> -->
-                <!-- TODO WRITE CALL TO GET ALL AVAILABLE CATEGORIES-->
-                <!-- TODO WRITE CALL TO GET ordered BY PRICE, DISCOUNT -->
-
             </div>
             <div class="col-md-9">
                 <div class="row" id="products">
@@ -75,13 +66,6 @@
             </div>
         </div>
     </div>
-
-    <style>
-        .slidecontainer {
-            width: 100%;
-            /* Width of the outside container */
-        }
-    </style>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
@@ -94,16 +78,13 @@
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <script>
 
-        function msg(ev) {
-            console.log("Hello");
-            window.location.href = "/login";
+        function run() {
+            document.getElementById("selectorvvv").value
         }
 
-        document.getElementById("login").addEventListener("click", () => {
-            window.location.replace("localhost:8001/login");
-        })
-
-        document.getElementById("register")
+        function clearCookies() {
+            document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+        }
 
         function getCookie(cname) {
             var name = cname + "=";
@@ -135,51 +116,143 @@
             "method": "POST",
             "headers": {
                 "Content-Type": "application/json",
-                "User-Agent": "PostmanRuntime/7.17.1",
                 "Accept": "*/*",
                 "Cache-Control": "no-cache",
                 "Postman-Token": "3de2de7b-8344-4336-81ca-7bd62165efbe,80328681-243f-4b08-b66b-9b070d3926eb",
-                "Host": "localhost:8001",
-                "Accept-Encoding": "gzip, deflate",
-                "Content-Length": "28",
-                "Connection": "keep-alive",
                 "cache-control": "no-cache"
             },
             "processData": false,
             "data": "{\n    \"value\": \"unitprice\"\n}"
         }
 
+        var settings2 = {
+            "async": true,
+            "crossDomain": true,
+            "url": "http://localhost:8001/fetchAll",
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json",
+                "Accept": "*/*",
+                "Cache-Control": "no-cache",
+                "Postman-Token": "3de2de7b-8344-4336-81ca-7bd62165efbe,80328681-243f-4b08-b66b-9b070d3926eb",
+                "cache-control": "no-cache"
+            },
+            "processData": false,
+            "data": "{\n    \"value\": \"proddiscount\"\n}"
+        }
+
         $.ajax(settings1).done(function (response) {
+            document.getElementById("navbarDropdownMenuLink").innerHTML = "Hello! " + (getCookie("loginCookie") || "Stranger");
             console.log(response);
+            document.getElementById("products").innerHTML = "";
             response.forEach(element => {
                 document.getElementById("products").innerHTML += `<div class="card" style="width: 20rem; margin: 1em;">
                                     <img class="card-img-top" src="${element.imgdata.split('?')[0]}">
                                     <div class="card-body">
                                     <h4 class="card-title" id="prod-title">${element.productname}</h4>
                                     <p class="card-text">Price: ${element.unitprice}</p>
-                                    <a href="#" class="btn btn-primary">Add to cart &rarr;</a>
+                                    <p class="card-text">Product ID: ${element.prodID}</p>
+                                    <a onclick="addToCart(${element.prodID})" class="btn btn-primary">Add to cart &rarr;</a>
                                 </div>
                             </div>
                             `
             });
         });
 
+        var settings3 = {
+            "async": true,
+            "crossDomain": true,
+            "url": "http://localhost:8001/fetchallcategories",
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json",
+                "User-Agent": "PostmanRuntime/7.17.1",
+                "Accept": "*/*",
+                "Cache-Control": "no-cache",
+                "Postman-Token": "bbab3333-08a3-4530-a346-4ff6e020061a,a8469a7a-609e-4609-9d10-1d42240a60ee",
+                "Host": "localhost:8001",
+                "Accept-Encoding": "gzip, deflate",
+                "Content-Length": "46",
+                "Connection": "keep-alive",
+                "cache-control": "no-cache"
+            },
+            "processData": false,
+            "data": "{\n    \"email\": \"1\",\n    \"password\":\"1321412\"\n}"
+            }
+
+        $.ajax(settings3).done(function (response) {
+            console.log(response);
+            var a = 1;
+            response.forEach(element => {
+                a = a+1;
+                console.log(element["categoryname"]);
+                var ele = document.createElement("option");
+                ele.text = element["categoryname"];
+                document.getElementById("selectorvvv").add(ele);
+            })
+        });
+
         document.getElementById("sortbyprice").addEventListener("click", (ev) => {
             $.ajax(settings1).done(function (response) {
                 console.log(response);
+                document.getElementById("products").innerHTML = "";
                 response.forEach(element => {
                     document.getElementById("products").innerHTML += `<div class="card" style="width: 20rem; margin: 1em;">
                                     <img class="card-img-top" src="${element.imgdata.split('?')[0]}">
                                     <div class="card-body">
                                     <h4 class="card-title" id="prod-title">${element.productname}</h4>
                                     <p class="card-text">Price: ${element.unitprice}</p>
-                                    <a href="#" class="btn btn-primary">Add to cart &rarr;</a>
+                                    <a onclick="addToCart(${element.prodID})" class="btn btn-primary">Add to cart &rarr;</a>
                                 </div>
                             </div>
                             `
                 });
             });
         })
+
+        document.getElementById("sortbydiscount").addEventListener("click", (ev) => {
+            $.ajax(settings2).done(function (response) {
+                console.log(response);
+                document.getElementById("products").innerHTML = "";
+                response.forEach(element => {
+                    document.getElementById("products").innerHTML += `<div class="card" style="width: 20rem; margin: 1em;">
+                                    <img class="card-img-top" src="${element.imgdata.split('?')[0]}">
+                                    <div class="card-body">
+                                    <h4 class="card-title" id="prod-title">${element.productname}</h4>
+                                    <p class="card-text">Price: ${element.unitprice}</p>
+                                    <a onclick="addToCart(${element.prodID})" class="btn btn-primary">Add to cart &rarr;</a>
+                                </div>
+                            </div>
+                            `
+                });
+            });
+        })
+        
+
+        function addToCart(ID) {
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "http://localhost:8001/addToCart",
+                "method": "POST",
+                "headers": {
+                    "Content-Type": "application/json",
+                    "cache-control": "no-cache",
+                    "Postman-Token": "7ff4b411-9b4b-44c3-a639-843098822e73"
+                },
+                "processData": false,
+                "data": `{\n\t\"custID\" : \"${getCookie("loginCookie")}\",\n\t\"prodID\" : ${ID},\n\t\"prodcnt\": 1\n}`
+            }
+
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+                if(response) {
+                    window.alert("Product has been added to your cart!");
+                }
+            });
+        }
+
+
     </script>
 </body>
 

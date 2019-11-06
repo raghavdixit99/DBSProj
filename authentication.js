@@ -33,7 +33,7 @@ module.exports.login = function(req,res) {
       } else {
         console.log('login successful');
         if (req.cookies === undefined || req.cookies.cookieName === undefined) { 
-          res.cookie('loginCookie',req.body.email, { maxAge: 900000, httpOnly: true }).sendFile(__dirname+"/"+"index.html");
+          res.cookie('loginCookie',req.body.email, { maxAge: 900000, httpOnly: false }).sendFile(__dirname+"/"+"index.html");
         } else {
           console.log('cookie exists', req.cookies.loginCookie);
           res.sendFile(__dirname+"/"+"index.html");
@@ -103,8 +103,7 @@ module.exports.forgotpass = function (req,res){
 }
 
 module.exports.fetchCategory = function (req,res) {
-  console.log('in');
-  connection.query('select * from product where categoryID = '+req.body.category, function (err,result,fields){
+  connection.query('select * from product where categoryID = "'+req.body.category+'";', function (err,result,fields){
     
     if(err)  console.log(err);
 
@@ -141,7 +140,7 @@ module.exports.fetchByPriceRange = function (req,res) {
 }
 
 module.exports.fetchAllCategories = function (req,res) {
-  connection.query('select distinct(categoryname) from product',function (err,result,fields) { 
+  connection.query('select distinct(categoryname) from product natural join category;',function (err,result,fields) { 
     if(err)  console.log(err);
     else
     res.send(result);
